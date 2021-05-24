@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+  db:
+    container_name: cinemais-db
+    image: postgres:alpine
+    expose:
+      - "${DB_PORT}"
+    volumes:
+      - "cinemais-volume:/var/lib/postgres"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USER}
+    networks:
+      - cinemais-network
+    restart: unless-stopped
+
+  cinemais:
+    container_name: cinemais-api
+    build:
+      context: .
+      dockerfile: Dockerfile-local
+    working_dir: /cinemais-volume/app
+    ports:
+      - "${PORT_EXPOSED}:${PORT}"
+    volumes:
+      - "./:/cinemais-volume/app"
+      - "/cinemais-volume/app/node_modules"
+    depends_on:
+      - db
+    networks:
+      - cinemais-network
+    restart: unless-stopped
+
+networks:
+  cinemais-network:
+    driver: bridge
+
+volumes:
+  cinemais-volume:
+    driver: "local"
