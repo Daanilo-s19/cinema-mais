@@ -1,4 +1,4 @@
-export interface PriceSession {
+export interface PriceSessionDto {
   createAt: Date;
   total: Number;
 }

@@ -1,5 +1,5 @@
-import { MovieRoom } from "./movieRoom.dto";
+import { MovieRoomDto } from "./movieRoom.dto";
 
-export interface MovieRoom3D extends MovieRoom {
+export interface MovieRoom3DDto extends MovieRoomDto {
   tools: string[];
 }

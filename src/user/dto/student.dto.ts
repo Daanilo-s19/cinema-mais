@@ -1,5 +1,5 @@
-import { User } from "./user.dto";
+import { User as UserDto } from "./user.dto";
 
-export interface Student extends User {
+export interface StudentDto extends UserDto {
   institution: string;
 }

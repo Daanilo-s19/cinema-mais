@@ -1,3 +1,3 @@
-export interface MovieRoom {
+export interface MovieRoomDto {
   capacity: Number;
 }

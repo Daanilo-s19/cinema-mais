@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { CinemaDto } from "../dto/cinema.dto";
 import { Cinema } from "../entities/cinema.entity";
 import { CinemaRepository } from "../repositories/cinema.repository";
 
@@ -10,10 +11,17 @@ export class CinemaService {
     private readonly cinemaRepository: CinemaRepository
   ) {}
 
-  create(): Promise<Cinema> {
+  async createCinema(cinemaDto: CinemaDto): Promise<Cinema> {
     const cinema = new Cinema();
-
     return this.cinemaRepository.save(cinema);
+  }
+  async updateCinema(id: number, cinemaDto: CinemaDto): Promise<Cinema> {
+    const cinema = new Cinema();
+    cinema.city = cinemaDto.city;
+    cinema.movieRoom = cinemaDto.movieRoom;
+    cinema.name = cinemaDto.name;
+    await this.cinemaRepository.update(id, cinema);
+    return cinema;
   }
 
   async findAll(): Promise<Cinema[]> {
@@ -24,7 +32,7 @@ export class CinemaService {
     return this.cinemaRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     await this.cinemaRepository.delete(id);
   }
 }

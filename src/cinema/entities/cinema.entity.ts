@@ -4,19 +4,11 @@ import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 export class Cinema {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column({ length: 500 })
+  @Column("text")
   name: string;
 
+  @Column()
+  movieRoom: MovieRoom;
   @Column("text")
-  description: string;
-
-  @Column()
-  filename: string;
-
-  @Column("int")
-  views: number;
-
-  @Column()
-  isPublished: boolean;
+  city: string;
 }

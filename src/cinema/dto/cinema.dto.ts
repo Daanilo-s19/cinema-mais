@@ -1,7 +1,8 @@
-import { MovieRoom } from "./movieRoom.dto";
+import { MovieRoomDto } from "./movieRoom.dto";
 
-export interface Cinema {
+export interface CinemaDto {
+  id: number;
   name: string;
-  movieRoom: MovieRoom;
+  movieRoom: MovieRoomDto;
   city: string;
 }

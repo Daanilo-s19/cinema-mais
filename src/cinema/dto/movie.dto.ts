@@ -1,4 +1,4 @@
-export interface Movie {
+export interface MovieDto {
   title: string;
   director: string;
   actor: string;
