@@ -1,4 +1,5 @@
 export interface MovieDto {
+  id: number;
   title: string;
   director: string;
   actor: string;

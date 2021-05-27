@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { MovieRoom } from "./movieRoom.entity";
 
 @Entity()
 export class Cinema {
