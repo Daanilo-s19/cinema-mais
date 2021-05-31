@@ -12,11 +12,11 @@ export class CinemaService {
   ) {}
 
   async createCinema(cinemaDto: CinemaDto): Promise<Cinema> {
-    const cinema = new Cinema();
+    const cinema = this.cinemaRepository.create();
     return this.cinemaRepository.save(cinema);
   }
   async updateCinema(id: number, cinemaDto: CinemaDto): Promise<Cinema> {
-    const cinema = new Cinema();
+    const cinema = this.cinemaRepository.create();
     cinema.city = cinemaDto.city;
     cinema.movieRoom = cinemaDto.movieRoom;
     cinema.name = cinemaDto.name;
