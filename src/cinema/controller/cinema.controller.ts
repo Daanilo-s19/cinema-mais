@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from "@nestjs/common";
 import { CinemaDto } from "../dto/cinema.dto";
 import { Cinema } from "../entities/cinema.entity";
 import { CinemaService } from "../services/cinema.service";
@@ -12,7 +20,7 @@ export class CinemaController {
     return this.cinemaService.createCinema(cinemaDto);
   }
 
-  @Post(":id")
+  @Put(":id")
   update(
     @Param("id") id: number,
     @Body() cinemaDto: CinemaDto
