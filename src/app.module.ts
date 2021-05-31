@@ -1,3 +1,4 @@
+import { MovieRoomModule } from "./movieRoom/movieRoom.module";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -6,6 +7,7 @@ import { LoggerModule } from "./logger/logger.module";
 import { CoreModule } from "./core/core.module";
 import { InfraModule } from "./infra/infra.module";
 import { AppController } from "./controllers/app.controller";
+import { CinemaModule } from "./cinema/cinema.module";
 
 @Module({
   imports: [
@@ -16,9 +18,12 @@ import { AppController } from "./controllers/app.controller";
         configService.get(databaseConfigKey)!,
       inject: [ConfigService],
     }),
+
     CoreModule,
     LoggerModule,
     InfraModule,
+    CinemaModule,
+    MovieRoomModule,
   ],
   controllers: [AppController],
 })

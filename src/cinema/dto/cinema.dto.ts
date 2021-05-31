@@ -1,4 +1,4 @@
-import { MovieRoomDto } from "./movieRoom.dto";
+import { MovieRoomDto } from "src/movieRoom/dto/movieRoom.dto";
 
 export interface CinemaDto {
   id: number;

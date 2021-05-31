@@ -1,4 +1,4 @@
-import { SessionMovieDto } from "../../cinema/dto/session.dto";
+import { SessionMovieDto } from "../../movieRoom/dto/session.dto";
 
 export interface User {
   name: string;
