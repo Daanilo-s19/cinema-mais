@@ -1,3 +1,4 @@
+import { SessionModule } from "./session/session.module";
 import { MovieRoomModule } from "./movieRoom/movieRoom.module";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -11,6 +12,7 @@ import { CinemaModule } from "./cinema/cinema.module";
 
 @Module({
   imports: [
+    SessionModule,
     ConfigModule.forRoot({ load: configs }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
