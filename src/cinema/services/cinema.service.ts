@@ -18,7 +18,6 @@ export class CinemaService {
   async updateCinema(id: number, cinemaDto: CinemaDto): Promise<Cinema> {
     const cinema = this.cinemaRepository.create();
     cinema.city = cinemaDto.city;
-    cinema.movieRoom = cinemaDto.movieRoom;
     cinema.name = cinemaDto.name;
     await this.cinemaRepository.update(id, cinema);
     return cinema;

@@ -1,3 +1,5 @@
+import { PriceSessionController } from "./priceSession/controller/price_session.controller";
+import { PriceSessionModule } from "./priceSession/price_session.module";
 import { SessionModule } from "./session/session.module";
 import { MovieRoomModule } from "./movieRoom/movieRoom.module";
 import { Module } from "@nestjs/common";
@@ -12,7 +14,6 @@ import { CinemaModule } from "./cinema/cinema.module";
 
 @Module({
   imports: [
-    SessionModule,
     ConfigModule.forRoot({ load: configs }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -26,6 +27,8 @@ import { CinemaModule } from "./cinema/cinema.module";
     InfraModule,
     CinemaModule,
     MovieRoomModule,
+    PriceSessionModule,
+    SessionModule,
   ],
   controllers: [AppController],
 })

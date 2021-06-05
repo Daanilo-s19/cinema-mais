@@ -1,4 +1,4 @@
-import { BaseRepository } from "typeorm-transactional-cls-hooked/dist/BaseRepository";
+import { BaseRepository } from "typeorm-transactional-cls-hooked";
 import { Cinema } from "../entities/cinema.entity";
 import { EntityRepository } from "typeorm";
 

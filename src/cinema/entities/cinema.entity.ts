@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { MovieRoom } from "../../movieRoom/entities/movieRoom.entity";
 
 @Entity()
@@ -8,8 +8,8 @@ export class Cinema {
   @Column("text")
   name: string;
 
-  @Column()
-  movieRoom: MovieRoom;
   @Column("text")
   city: string;
+  @OneToMany(() => MovieRoom, (movieRoom) => movieRoom.cinema)
+  movieRooms: MovieRoom[];
 }

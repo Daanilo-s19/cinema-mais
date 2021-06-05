@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { SessionService } from "src/session/services/session.service";
 import { MovieRoomDto } from "../dto/movieRoom.dto";
 import { MovieRoom } from "../entities/movieRoom.entity";
 import { MovieRoomRepository } from "../repository/movieRoom.repository";
@@ -8,19 +9,19 @@ import { MovieRoomRepository } from "../repository/movieRoom.repository";
 export class MovieRoomService {
   constructor(
     @InjectRepository(MovieRoom)
+    private readonlySession: SessionService,
     private readonly movieRoomRepository: MovieRoomRepository
   ) {}
-  async createMovieRoom(movieRoomDto: MovieRoomDto): Promise<MovieRoomDto> {
-    const movieRoom = this.movieRoomRepository.create();
+  async createMovieRoom(movieRoomDto: MovieRoomDto): Promise<MovieRoom> {
+    const movieRoom = this.movieRoomRepository.create(movieRoomDto);
     return this.movieRoomRepository.save(movieRoom);
   }
   async updateMovieRoom(
     id: number,
     movieRoomDto: MovieRoomDto
-  ): Promise<MovieRoomDto> {
-    const movieRoom = this.movieRoomRepository.create();
-    movieRoom.capacity = movieRoomDto.capacity;
-    movieRoom.id = movieRoomDto.id;
+  ): Promise<MovieRoom> {
+    const movieRoom = this.movieRoomRepository.create(movieRoomDto);
+
     this.movieRoomRepository.update(id, movieRoom);
     return movieRoom;
   }

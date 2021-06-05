@@ -1,10 +1,9 @@
 import { MovieRoomDto } from "src/movieRoom/dto/movieRoom.dto";
 import { MovieDto } from "../../cinema/dto/movie.dto";
-import { PriceSessionDto } from "./price_session.dto";
+import { PriceSessionDto } from "../../priceSession/dto/price_session.dto";
 
 export class SessionDto {
-  movie: MovieDto;
-  movieRoom: MovieRoomDto;
+  id: number;
+  idMovie: number;
   date: Date;
-  price: PriceSessionDto;
 }

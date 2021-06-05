@@ -1,11 +1,13 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Session {
+export class PriceSession {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column("number")
-  idMovie: number;
   @Column("date")
-  date: Date;
+  createAt: Date;
+  @Column("number")
+  total: Number;
+  @Column("boolean")
+  isWeekend: boolean;
 }
