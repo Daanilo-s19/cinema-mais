@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Transactional } from "typeorm-transactional-cls-hooked";
 import { PriceSessionDto } from "../dto/price_session.dto";
 import { PriceSession } from "../entities/price_session.entity";
 import { PriceSessionRepository } from "../repository/price_session.repository";
@@ -14,6 +15,7 @@ export class PriceSessionService {
     const priceSession = this.priceSessionRepository.create(priceSessionDto);
     return this.priceSessionRepository.save(priceSession);
   }
+  @Transactional()
   async update(
     id: number,
     priceSessionDto: PriceSessionDto
@@ -28,6 +30,7 @@ export class PriceSessionService {
   async findOne(id: number): Promise<PriceSession | undefined> {
     return this.priceSessionRepository.findOne(id);
   }
+  @Transactional()
   async remove(id: number): Promise<void> {
     await this.priceSessionRepository.delete(id);
   }

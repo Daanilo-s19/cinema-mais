@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Transactional } from "typeorm-transactional-cls-hooked";
 import { TicketDto } from "../dto/ticket.dto";
 import { Ticket } from "../entities/ticket.entity";
 import { TicketRepository } from "../repository/ticket.repository";
@@ -14,6 +15,7 @@ export class TicketService {
     const ticket = this.ticketRepository.create(ticketDto);
     return this.ticketRepository.save(ticket);
   }
+  @Transactional()
   async update(id: number, ticketDto: TicketDto): Promise<Ticket> {
     const ticket = this.ticketRepository.create(ticketDto);
     await this.ticketRepository.update(id, ticket);
@@ -25,6 +27,7 @@ export class TicketService {
   async findOne(id: number): Promise<Ticket | undefined> {
     return this.ticketRepository.findOne(id);
   }
+  @Transactional()
   async remove(id: number): Promise<void> {
     await this.ticketRepository.delete(id);
   }

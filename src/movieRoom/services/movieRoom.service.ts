@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { SessionService } from "src/session/services/session.service";
+import { Transactional } from "typeorm-transactional-cls-hooked";
 import { MovieRoomDto } from "../dto/movieRoom.dto";
 import { MovieRoom } from "../entities/movieRoom.entity";
 import { MovieRoomRepository } from "../repository/movieRoom.repository";
@@ -16,6 +17,7 @@ export class MovieRoomService {
     const movieRoom = this.movieRoomRepository.create(movieRoomDto);
     return this.movieRoomRepository.save(movieRoom);
   }
+  @Transactional()
   async updateMovieRoom(
     id: number,
     movieRoomDto: MovieRoomDto
@@ -30,6 +32,7 @@ export class MovieRoomService {
   async findOne(id: number): Promise<MovieRoom | undefined> {
     return this.movieRoomRepository.findOne(id);
   }
+  @Transactional()
   async remove(id: number): Promise<void> {
     await this.movieRoomRepository.delete(id);
   }
