@@ -1,3 +1,4 @@
+import { TicketModule } from "./ticket/ticket.module";
 import { PriceSessionController } from "./priceSession/controller/price_session.controller";
 import { PriceSessionModule } from "./priceSession/price_session.module";
 import { SessionModule } from "./session/session.module";
@@ -14,6 +15,7 @@ import { CinemaModule } from "./cinema/cinema.module";
 
 @Module({
   imports: [
+    TicketModule,
     ConfigModule.forRoot({ load: configs }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
