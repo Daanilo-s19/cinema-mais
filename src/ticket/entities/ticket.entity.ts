@@ -1,6 +1,13 @@
-import { Session } from "node:inspector";
 import { Customer } from "src/customer/entities/customer.entity";
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Session } from "src/session/entities/session.entity";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 
 @Entity()
 export class Ticket {
@@ -8,12 +15,16 @@ export class Ticket {
   id: number;
   @Column("number")
   price: number;
-  @Column("number")
-  sessionId: number;
-  // @ManyToOne(() => Session)
-  // session: Session;
+
   @Column("number")
   customerId: number;
-  // @ManyToOne(() => Customer)
-  // customer: Customer;
+  @OneToOne(() => Customer)
+  @JoinColumn()
+  customer: Customer;
+
+  @Column("number")
+  sessionId: number;
+  @OneToOne(() => Session)
+  @JoinColumn()
+  session: Session;
 }
