@@ -10,7 +10,7 @@ export class PriceSessionService {
     @InjectRepository(PriceSession)
     private readonly priceSessionRepository: PriceSessionRepository
   ) {}
-  async create(priceSessionDto: PriceSessionDto): Promise<PriceSessionDto> {
+  async create(priceSessionDto: PriceSessionDto): Promise<PriceSession> {
     const priceSession = this.priceSessionRepository.create(priceSessionDto);
     return this.priceSessionRepository.save(priceSession);
   }

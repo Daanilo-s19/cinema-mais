@@ -11,7 +11,7 @@ export class SessionService {
     @InjectRepository(Session)
     private readonly sessionRepository: SessionRepository
   ) {}
-  async createSession(sessionDto: SessionDto): Promise<SessionDto> {
+  async createSession(sessionDto: SessionDto): Promise<Session> {
     const session = this.sessionRepository.create(sessionDto);
     return this.sessionRepository.save(session);
   }
