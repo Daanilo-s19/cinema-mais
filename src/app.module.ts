@@ -12,6 +12,7 @@ import { CoreModule } from "./core/core.module";
 import { InfraModule } from "./infra/infra.module";
 import { AppController } from "./controllers/app.controller";
 import { CinemaModule } from "./cinema/cinema.module";
+import { MovieModule } from "./movie/movie.module";
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { CinemaModule } from "./cinema/cinema.module";
     MovieRoomModule,
     PriceSessionModule,
     SessionModule,
+    MovieModule,
   ],
   controllers: [AppController],
 })

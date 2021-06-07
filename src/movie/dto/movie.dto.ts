@@ -9,18 +9,3 @@ export interface MovieDto {
   ageRating: Agerating;
   category: Category;
 }
-
-enum Category {
-  ACTION,
-  COMEDY,
-  SUSPENSE,
-  TERROR,
-}
-enum Agerating {
-  FREE,
-  TWELVE,
-  FOURTEEN,
-  SIXTEEN,
-  EIGHTEEN,
-  TWENTY,
-}
