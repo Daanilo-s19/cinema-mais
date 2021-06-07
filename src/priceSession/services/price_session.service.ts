@@ -11,15 +11,15 @@ export class PriceSessionService {
     private readonly priceSessionRepository: PriceSessionRepository
   ) {}
   async create(priceSessionDto: PriceSessionDto): Promise<PriceSessionDto> {
-    const priceSession = this.priceSessionRepository.create();
+    const priceSession = this.priceSessionRepository.create(priceSessionDto);
     return this.priceSessionRepository.save(priceSession);
   }
   async update(
     id: number,
     priceSessionDto: PriceSessionDto
   ): Promise<PriceSession> {
-    const priceSession = this.priceSessionRepository.create();
-    this.priceSessionRepository.update(id, priceSession);
+    const priceSession = this.priceSessionRepository.create(priceSessionDto);
+    await this.priceSessionRepository.update(id, priceSession);
     return priceSession;
   }
   async findAll(): Promise<PriceSession[]> {

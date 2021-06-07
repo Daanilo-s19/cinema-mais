@@ -1,3 +1,5 @@
+import { IsEnum } from "class-validator";
+
 export interface MovieDto {
   id: number;
   title: string;
@@ -5,7 +7,14 @@ export interface MovieDto {
   actor: string;
   duration: Number;
   ageRating: Agerating;
-  category: "ACTION" | "COMEDY" | "SUSPENSE" | "TERROR";
+  category: Category;
+}
+
+enum Category {
+  ACTION,
+  COMEDY,
+  SUSPENSE,
+  TERROR,
 }
 enum Agerating {
   FREE,

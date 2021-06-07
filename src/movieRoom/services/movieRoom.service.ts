@@ -21,8 +21,7 @@ export class MovieRoomService {
     movieRoomDto: MovieRoomDto
   ): Promise<MovieRoom> {
     const movieRoom = this.movieRoomRepository.create(movieRoomDto);
-
-    this.movieRoomRepository.update(id, movieRoom);
+    await this.movieRoomRepository.update(id, movieRoom);
     return movieRoom;
   }
   async findAll(): Promise<MovieRoom[]> {
