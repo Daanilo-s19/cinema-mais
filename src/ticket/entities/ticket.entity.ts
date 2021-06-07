@@ -10,10 +10,10 @@ export class Ticket {
   price: number;
   @Column("number")
   sessionId: number;
-  @ManyToOne(() => Session)
-  session: Session;
+  // @ManyToOne(() => Session)
+  // session: Session;
   @Column("number")
   customerId: number;
-  @ManyToOne(() => Customer)
-  customer: Customer;
+  // @ManyToOne(() => Customer)
+  // customer: Customer;
 }
