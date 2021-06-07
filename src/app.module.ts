@@ -1,3 +1,4 @@
+import { CustomerModule } from "./customer/customer.module";
 import { TicketModule } from "./ticket/ticket.module";
 import { PriceSessionController } from "./priceSession/controller/price_session.controller";
 import { PriceSessionModule } from "./priceSession/price_session.module";
@@ -16,7 +17,6 @@ import { MovieModule } from "./movie/movie.module";
 
 @Module({
   imports: [
-    TicketModule,
     ConfigModule.forRoot({ load: configs }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -33,6 +33,8 @@ import { MovieModule } from "./movie/movie.module";
     PriceSessionModule,
     SessionModule,
     MovieModule,
+    CustomerModule,
+    TicketModule,
   ],
   controllers: [AppController],
 })

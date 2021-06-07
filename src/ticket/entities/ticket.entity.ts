@@ -1,4 +1,5 @@
 import { Session } from "node:inspector";
+import { Customer } from "src/customer/entities/customer.entity";
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
 @Entity()
