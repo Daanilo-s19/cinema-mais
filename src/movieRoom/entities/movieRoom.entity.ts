@@ -5,7 +5,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 export class MovieRoom {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column("number")
+  @Column("int")
   capacity: number;
   @Column("int")
   cinemaId: number;

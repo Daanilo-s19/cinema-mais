@@ -1,4 +1,5 @@
 import { IsEnum, IsPositive, IsString, Min } from "class-validator";
+import { Agerating, Category } from "../enum/movie.enum";
 
 export class MovieDto {
   @IsPositive()
@@ -11,7 +12,9 @@ export class MovieDto {
   actor: string;
   @IsPositive()
   @Min(15)
-  duration: Number;
+  duration: number;
+  @IsEnum(Agerating)
   ageRating: Agerating;
+  @IsEnum(Category)
   category: Category;
 }

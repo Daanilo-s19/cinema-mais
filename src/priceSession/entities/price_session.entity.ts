@@ -6,8 +6,8 @@ export class PriceSession {
   id: number;
   @Column("date")
   createAt: Date;
-  @Column("number")
-  total: Number;
+  @Column("int")
+  total: number;
   @Column("boolean")
   isWeekend: boolean;
 }

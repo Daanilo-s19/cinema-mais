@@ -6,7 +6,7 @@ export class PriceSessionDto {
   @IsDate()
   createAt: Date;
   @IsPositive()
-  total: Number;
+  total: number;
   @IsBoolean()
   isWeekend: boolean;
 }

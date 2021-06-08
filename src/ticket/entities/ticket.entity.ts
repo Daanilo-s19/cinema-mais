@@ -13,16 +13,16 @@ import {
 export class Ticket {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column("number")
+  @Column("int")
   price: number;
 
-  @Column("number")
+  @Column("int")
   customerId: number;
   @OneToOne(() => Customer)
   @JoinColumn()
   customer: Customer;
 
-  @Column("number")
+  @Column("int")
   sessionId: number;
   @OneToOne(() => Session)
   @JoinColumn()

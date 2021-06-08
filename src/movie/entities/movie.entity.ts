@@ -1,18 +1,18 @@
-import { Session } from "node:inspector";
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Agerating, Category } from "../enum/movie.enum";
 
 @Entity()
 export class Movie {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column("string")
+  @Column("text")
   title: string;
-  @Column("string")
+  @Column("text")
   director: string;
-  @Column("string")
+  @Column("text")
   actor: string;
-  @Column("number")
-  duration: Number;
+  @Column("int")
+  duration: number;
   @Column()
   ageRating: Agerating;
   @Column()

@@ -1,10 +1,10 @@
-enum Category {
+export enum Category {
   ACTION,
   COMEDY,
   SUSPENSE,
   TERROR,
 }
-enum Agerating {
+export enum Agerating {
   FREE,
   TWELVE,
   FOURTEEN,
