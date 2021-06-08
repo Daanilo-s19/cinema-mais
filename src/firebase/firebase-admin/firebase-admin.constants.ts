@@ -1,1 +1,0 @@
-export const FIREBASE_OPTIONS = 'FIREBASE_OPTIONS';
