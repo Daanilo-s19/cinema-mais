@@ -10,7 +10,6 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { configs, databaseConfigKey } from "./config";
 import { LoggerModule } from "./logger/logger.module";
 import { CoreModule } from "./core/core.module";
-import { InfraModule } from "./infra/infra.module";
 import { AppController } from "./controllers/app.controller";
 import { CinemaModule } from "./cinema/cinema.module";
 import { MovieModule } from "./movie/movie.module";
@@ -27,7 +26,6 @@ import { MovieModule } from "./movie/movie.module";
 
     CoreModule,
     LoggerModule,
-    InfraModule,
     CinemaModule,
     MovieRoomModule,
     PriceSessionModule,
