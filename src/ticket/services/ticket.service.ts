@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Transactional } from "typeorm-transactional-cls-hooked";
 import { TicketDto } from "../dto/ticket.dto";
@@ -11,6 +11,7 @@ export class TicketService {
     @InjectRepository(Ticket)
     private readonly ticketRepository: TicketRepository
   ) {}
+  @Transactional()
   async create(ticketDto: TicketDto): Promise<Ticket> {
     const ticket = this.ticketRepository.create(ticketDto);
     return this.ticketRepository.save(ticket);
@@ -24,8 +25,13 @@ export class TicketService {
   async findAll(): Promise<Ticket[]> {
     return this.ticketRepository.find();
   }
-  async findOne(id: number): Promise<Ticket | undefined> {
-    return this.ticketRepository.findOne(id);
+  async findOne(id: number): Promise<Ticket> {
+    const ticket = await this.ticketRepository.findOne(id);
+    if (!ticket) {
+      throw new NotFoundException();
+    }
+
+    return ticket;
   }
   @Transactional()
   async remove(id: number): Promise<void> {
