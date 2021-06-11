@@ -1,11 +1,18 @@
+import { CustomerModule } from "./customer/customer.module";
+import { TicketModule } from "./ticket/ticket.module";
+import { PriceSessionController } from "./priceSession/controller/price_session.controller";
+import { PriceSessionModule } from "./priceSession/price_session.module";
+import { SessionModule } from "./session/session.module";
+import { MovieRoomModule } from "./movieRoom/movieRoom.module";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { configs, databaseConfigKey } from "./config";
 import { LoggerModule } from "./logger/logger.module";
 import { CoreModule } from "./core/core.module";
-import { InfraModule } from "./infra/infra.module";
 import { AppController } from "./controllers/app.controller";
+import { CinemaModule } from "./cinema/cinema.module";
+import { MovieModule } from "./movie/movie.module";
 
 @Module({
   imports: [
@@ -16,9 +23,16 @@ import { AppController } from "./controllers/app.controller";
         configService.get(databaseConfigKey)!,
       inject: [ConfigService],
     }),
+
     CoreModule,
     LoggerModule,
-    InfraModule,
+    CinemaModule,
+    MovieRoomModule,
+    PriceSessionModule,
+    SessionModule,
+    MovieModule,
+    CustomerModule,
+    TicketModule,
   ],
   controllers: [AppController],
 })
