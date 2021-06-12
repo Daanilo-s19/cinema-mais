@@ -1,5 +1,5 @@
+import { MovieRoom } from "src/movie-room/entities/movie-room.entity";
 import { Movie } from "src/movie/entities/movie.entity";
-import { MovieRoom } from "src/movieRoom/entities/movieRoom.entity";
 import { PriceSession } from "src/priceSession/entities/price_session.entity";
 import {
   Entity,

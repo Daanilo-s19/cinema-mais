@@ -3,7 +3,6 @@ import { TicketModule } from "./ticket/ticket.module";
 import { PriceSessionController } from "./priceSession/controller/price_session.controller";
 import { PriceSessionModule } from "./priceSession/price_session.module";
 import { SessionModule } from "./session/session.module";
-import { MovieRoomModule } from "./movieRoom/movieRoom.module";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -13,6 +12,7 @@ import { CoreModule } from "./core/core.module";
 import { AppController } from "./controllers/app.controller";
 import { CinemaModule } from "./cinema/cinema.module";
 import { MovieModule } from "./movie/movie.module";
+import { MovieRoomModule } from "./movie-room/movie-room.module";
 
 @Module({
   imports: [

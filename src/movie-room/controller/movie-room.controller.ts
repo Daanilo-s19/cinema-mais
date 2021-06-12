@@ -7,23 +7,24 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { MovieRoom } from "src/movieRoom/entities/movieRoom.entity";
-import { MovieRoomDto } from "../dto/movieRoom.dto";
-import { MovieRoomService } from "../services/movieRoom.service";
+import { CreateMovieRoomDto } from "../dto/create-movie-room-dto";
+import { UpdateMovieRoomDto } from "../dto/update-movie-room.dto";
+import { MovieRoom } from "../entities/movie-room.entity";
+import { MovieRoomService } from "../services/movie-room.service";
 
-@Controller("movieRoom")
+@Controller("movie-room")
 export class MovieRoomController {
   constructor(private readonly movieRoomService: MovieRoomService) {}
 
   @Post()
-  create(@Body() movieRoomDto: MovieRoomDto): Promise<MovieRoom> {
+  create(@Body() movieRoomDto: CreateMovieRoomDto): Promise<MovieRoom> {
     return this.movieRoomService.createMovieRoom(movieRoomDto);
   }
 
   @Put(":id")
   update(
     @Param("id") id: number,
-    @Body() movieRoomDto: MovieRoomDto
+    @Body() movieRoomDto: UpdateMovieRoomDto
   ): Promise<MovieRoom> {
     return this.movieRoomService.updateMovieRoom(id, movieRoomDto);
   }

@@ -30,7 +30,7 @@ export class CinemaService {
   }
 
   async findAll(): Promise<Cinema[]> {
-    return this.cinemaRepository.find();
+    return this.cinemaRepository.find({ relations: ["rooms"] });
   }
 
   async findOne(id: number): Promise<Cinema> {
