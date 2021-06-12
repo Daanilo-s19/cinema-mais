@@ -1,10 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
-import { Agerating, Category } from "../enum/movie.enum";
+import { BaseEntity } from "src/core/entities/base.entity";
+import { Entity, Column } from "typeorm";
+import { AgeRating, Category } from "../enum/movie.enum";
 
 @Entity()
-export class Movie {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Movie extends BaseEntity {
   @Column("text")
   title: string;
   @Column("text")
@@ -13,8 +12,8 @@ export class Movie {
   actor: string;
   @Column("int")
   duration: number;
-  @Column()
-  ageRating: Agerating;
-  @Column()
+  @Column("varchar")
+  ageRating: AgeRating;
+  @Column("varchar")
   category: Category;
 }

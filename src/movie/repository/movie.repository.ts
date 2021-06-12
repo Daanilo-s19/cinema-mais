@@ -3,4 +3,4 @@ import { EntityRepository } from "typeorm";
 import { Movie } from "../entities/movie.entity";
 
 @EntityRepository(Movie)
-export abstract class MovieRepository extends BaseRepository<Movie> {}
+export class MovieRepository extends BaseRepository<Movie> {}
