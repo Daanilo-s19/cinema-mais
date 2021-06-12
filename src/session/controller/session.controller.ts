@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { SessionDto } from "../dto/session.dto";
+import { CreateSessionDto } from "../dto/session.dto";
 import { Session } from "../entities/session.entity";
 import { SessionService } from "../services/session.service";
 
@@ -8,11 +8,11 @@ export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
   @Get()
-  findAll(sessionDto: SessionDto): Promise<Session[]> {
+  findAll(sessionDto: CreateSessionDto): Promise<Session[]> {
     return this.sessionService.findRemainingAmount(sessionDto);
   }
   @Get()
-  isFullSession(sessionDto: SessionDto): Promise<boolean> {
+  isFullSession(sessionDto: CreateSessionDto): Promise<boolean> {
     return this.sessionService.isFullSession(sessionDto);
   }
 }

@@ -3,4 +3,4 @@ import { EntityRepository } from "typeorm";
 import { Session } from "../entities/session.entity";
 
 @EntityRepository(Session)
-export abstract class SessionRepository extends BaseRepository<Session> {}
+export class SessionRepository extends BaseRepository<Session> {}

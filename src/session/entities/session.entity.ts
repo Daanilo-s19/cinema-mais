@@ -1,3 +1,4 @@
+import { BaseEntity } from "src/core/entities/base.entity";
 import { MovieRoom } from "src/movie-room/entities/movie-room.entity";
 import { Movie } from "src/movie/entities/movie.entity";
 import { PriceSession } from "src/priceSession/entities/price_session.entity";
@@ -7,31 +8,30 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from "typeorm";
 
 @Entity()
-export class Session {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Session extends BaseEntity {
   @Column("date")
   date: Date;
 
   @Column("number")
-  movieRoomId: number;
-  @OneToOne(() => MovieRoom)
-  @JoinColumn()
-  movieRoom: MovieRoom;
+  roomId: number;
 
   @Column("number")
   movieId: number;
-  @OneToOne(() => Movie)
-  @JoinColumn()
-  movie: Movie;
 
   @Column("number")
   priceSessionId: number;
-  @OneToOne(() => PriceSession)
-  @JoinColumn()
+
+  @ManyToOne(() => Movie)
+  movie: Movie;
+
+  @ManyToOne(() => MovieRoom)
+  room: MovieRoom;
+
+  @ManyToOne(() => PriceSession)
   priceSession: PriceSession;
+
 }

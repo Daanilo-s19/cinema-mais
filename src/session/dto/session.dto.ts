@@ -1,10 +1,16 @@
-import { IsDate, IsPositive } from "class-validator";
+import { Type } from "class-transformer";
+import { IsDate, IsPositive, Min } from "class-validator";
 
-export class SessionDto {
+export class CreateSessionDto {
   @IsPositive()
-  id: number;
+  @Min(1)
+  movieId: number;
+
   @IsPositive()
-  idMovie: number;
+  @Min(1)
+  roomId: number;
+
   @IsDate()
+  @Type(() => Date)
   date: Date;
 }
