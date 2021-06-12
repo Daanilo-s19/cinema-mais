@@ -16,6 +16,8 @@ import { Ticket } from "../entities/ticket.entity";
 import { TicketViewerJson } from "../providers/ticker-viewer-json.provider";
 import { TicketViewerHtml } from "../providers/ticket-viewer-html.provider";
 import { TicketViewerStrategy } from "../providers/ticket-viewer-strategy.provider";
+import { TicketViewerXml } from "../providers/ticket-viewer-xml.provider";
+import { TicketViewerYaml } from "../providers/ticket-viewer-yaml.provider";
 import { TicketService } from "../services/ticket.service";
 
 @Controller("ticket")
@@ -59,14 +61,26 @@ export class TicketController {
     return res.send(await ticketViewer.generate(ticket));
   }
 
-  @Get(":id/json")
-  async viewJson(@Param("id", ParseIntPipe) id: number, @Res() res: Response) {
+  @Get(":id/xml")
+  async viewXml(@Param("id", ParseIntPipe) id: number, @Res() res: Response) {
     const ticket = await this.findOne(id);
     const ticketViewer: TicketViewerStrategy = this.moduleRef.get(
-      TicketViewerJson
+      TicketViewerXml
     );
 
-    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Content-Type", "application/xml");
+
+    return res.send(await ticketViewer.generate(ticket));
+  }
+
+  @Get(":id/yaml")
+  async viewYaml(@Param("id", ParseIntPipe) id: number, @Res() res: Response) {
+    const ticket = await this.findOne(id);
+    const ticketViewer: TicketViewerStrategy = this.moduleRef.get(
+      TicketViewerYaml
+    );
+
+    res.setHeader("Content-Type", "text/yaml");
 
     return res.send(await ticketViewer.generate(ticket));
   }
