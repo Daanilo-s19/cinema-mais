@@ -5,4 +5,8 @@ import { Customer } from "./customer.entity";
 export class Student extends Customer {
   @Column({ type: "text", nullable: true })
   organization?: string;
+
+  getDiscountPercentage(): number {
+    return 0.5;
+  }
 }

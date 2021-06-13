@@ -11,6 +11,7 @@ export abstract class TicketRepository extends BaseRepository<Ticket> {
       .innerJoinAndSelect("ticket.customer", "customer")
       .innerJoinAndSelect("ticket.session", "session")
       .innerJoinAndSelect("session.room", "room")
+      .innerJoinAndSelect("session.movie", "movie")
       .where("ticket.id = :id", { id });
 
     return query.getOne();

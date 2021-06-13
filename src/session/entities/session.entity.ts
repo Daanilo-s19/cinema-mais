@@ -1,10 +1,13 @@
+import dateUtil = require("date-fns");
 import { Expose } from "class-transformer";
+import { Entity, Column, ManyToOne, Index, OneToMany } from "typeorm";
+
 import { BaseEntity } from "src/core/entities/base.entity";
 import { MovieRoom } from "src/movie-room/entities/movie-room.entity";
 import { Movie } from "src/movie/entities/movie.entity";
 import { SessionPrice } from "src/session-price/entities/session-price.entity";
 import { Ticket } from "src/ticket/entities/ticket.entity";
-import { Entity, Column, ManyToOne, Index, OneToMany } from "typeorm";
+import { CLEANING_OFFSET } from "../session.constants";
 
 @Entity("session")
 export class Session extends BaseEntity {
@@ -46,5 +49,13 @@ export class Session extends BaseEntity {
   @Expose()
   get alreadyStarted(): boolean {
     return new Date() > this.date;
+  }
+
+  @Expose()
+  get endAt(): Date {
+    return dateUtil.addMinutes(
+      this.date,
+      this.movie.duration + CLEANING_OFFSET
+    );
   }
 }

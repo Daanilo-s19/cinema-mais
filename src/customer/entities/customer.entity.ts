@@ -13,4 +13,8 @@ export class Customer extends BaseEntity {
 
   @Column({ type: "varchar", default: CustomerType.Customer })
   type: CustomerType;
+
+  getDiscountPercentage(): number {
+    return 0;
+  }
 }

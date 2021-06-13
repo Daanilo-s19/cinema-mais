@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
 export class TimestampEntity extends BaseEntity {
   @CreateDateColumn()
