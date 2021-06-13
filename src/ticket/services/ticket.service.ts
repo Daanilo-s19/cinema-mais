@@ -6,7 +6,7 @@ import { TicketRepository } from "../repository/ticket.repository";
 @Injectable()
 export class TicketService {
   constructor(
-    @InjectRepository(Ticket)
+    @InjectRepository(TicketRepository)
     private readonly ticketRepository: TicketRepository
   ) {}
 
@@ -15,7 +15,7 @@ export class TicketService {
   }
 
   async findOne(id: number): Promise<Ticket> {
-    const ticket = await this.ticketRepository.findOne(id);
+    const ticket = await this.ticketRepository.getTicket(id);
     if (!ticket) {
       throw new NotFoundException();
     }

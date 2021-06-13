@@ -1,3 +1,4 @@
+import { Expose } from "class-transformer";
 import { BaseEntity } from "src/core/entities/base.entity";
 import { Customer } from "src/customer/entities/customer.entity";
 import { Session } from "src/session/entities/session.entity";
@@ -5,9 +6,6 @@ import { Entity, Column, ManyToOne } from "typeorm";
 
 @Entity("ticket")
 export class Ticket extends BaseEntity {
-  @Column("int")
-  price: number;
-
   @Column("int")
   sessionId: number;
 
@@ -19,4 +17,9 @@ export class Ticket extends BaseEntity {
 
   @ManyToOne(() => Session)
   session: Session;
+
+  @Expose()
+  get price(): number {
+    return 0;
+  }
 }

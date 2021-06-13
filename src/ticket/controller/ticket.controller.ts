@@ -1,31 +1,34 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   ParseIntPipe,
   Post,
-  Put,
   Res,
+  UseInterceptors,
 } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { Response } from "express";
 import { CreateTicketDto } from "../dto/create-ticket.dto";
 import { Ticket } from "../entities/ticket.entity";
-import { TicketViewerJson } from "../providers/ticker-viewer-json.provider";
 import { TicketViewerHtml } from "../providers/ticket-viewer-html.provider";
 import { TicketViewerStrategy } from "../providers/ticket-viewer-strategy.provider";
 import { TicketViewerXml } from "../providers/ticket-viewer-xml.provider";
 import { TicketViewerYaml } from "../providers/ticket-viewer-yaml.provider";
-import { BuyTicketFacade } from "../services/create-ticket-facade.service";
+import { BuyTicketFacade } from "../services/buy-ticket-facade.service";
+import { CancelTicketFacade } from "../services/cancel-ticket-facade.service";
 import { TicketService } from "../services/ticket.service";
 
 @Controller("ticket")
+@UseInterceptors(ClassSerializerInterceptor)
 export class TicketController {
   constructor(
     private readonly ticketService: TicketService,
     private readonly buyTicketFacade: BuyTicketFacade,
+    private readonly cancelTicketFacade: CancelTicketFacade,
     private moduleRef: ModuleRef
   ) {}
   @Post()
@@ -77,5 +80,10 @@ export class TicketController {
     res.setHeader("Content-Type", "text/yaml");
 
     return res.send(await ticketViewer.generate(ticket));
+  }
+
+  @Delete(":id")
+  async cancelTicket(@Param("id", ParseIntPipe) id: number): Promise<void> {
+    await this.cancelTicketFacade.cancel(id);
   }
 }

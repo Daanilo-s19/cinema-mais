@@ -6,8 +6,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { MovieRoom3dRepository } from "./repository/movie-room-3d.repository";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([MovieRoomRepository, MovieRoom3dRepository])],
+  imports: [
+    TypeOrmModule.forFeature([MovieRoomRepository, MovieRoom3dRepository]),
+  ],
   controllers: [MovieRoomController],
   providers: [MovieRoomService],
+  exports: [MovieRoomService],
 })
 export class MovieRoomModule {}

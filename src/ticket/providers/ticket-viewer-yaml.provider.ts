@@ -1,6 +1,7 @@
+import * as transformer from "class-transformer";
+import * as yaml from "js-yaml";
+
 import { Injectable } from "@nestjs/common";
-import transformer from "class-transformer";
-import yaml from "js-yaml";
 import { Ticket } from "../entities/ticket.entity";
 import { TicketViewerStrategy } from "./ticket-viewer-strategy.provider";
 

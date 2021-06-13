@@ -35,11 +35,16 @@ export class Session extends BaseEntity {
 
   @Expose()
   get remainingSeats(): number {
-    return this.room.capacity - this.tickets.length;
+    return this.room.capacity - (this.tickets?.length ?? 0);
   }
 
   @Expose()
   get hasRemainingSeats(): boolean {
     return this.remainingSeats > 0;
+  }
+
+  @Expose()
+  get alreadyStarted(): boolean {
+    return new Date() > this.date;
   }
 }

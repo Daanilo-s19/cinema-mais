@@ -12,5 +12,6 @@ import { StudentRepository } from "./repository/student.repository";
   ],
   controllers: [CustomerController],
   providers: [CustomerService],
+  exports: [CustomerService],
 })
 export class CustomerModule {}

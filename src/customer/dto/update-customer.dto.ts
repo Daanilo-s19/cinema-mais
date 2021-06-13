@@ -1,14 +1,11 @@
-import { 
-    IsString,
-    IsOptional,
-  } from "class-validator";
+import { IsString, IsOptional } from "class-validator";
 
 export class UpdateCustomerDto {
-    @IsString()
-    @IsOptional()
-    name: string;
-  
-    @IsString()
-    @IsOptional()
-    organization: string;
-  }
+  @IsString()
+  @IsOptional()
+  name?: string;
+
+  @IsString()
+  @IsOptional()
+  organization?: string;
+}

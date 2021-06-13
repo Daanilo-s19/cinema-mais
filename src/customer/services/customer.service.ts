@@ -5,15 +5,16 @@ import { CreateCustomerDto } from "../dto/create-customer.dto";
 import { UpdateCustomerDto } from "../dto/update-customer.dto";
 import { Customer } from "../entities/customer.entity";
 import { Student } from "../entities/student.entity";
+import { CustomerType } from "../enums/customer-type.enum";
 import { CustomerRepository } from "../repository/customer.repository";
 import { StudentRepository } from "../repository/student.repository";
 
 @Injectable()
 export class CustomerService {
   constructor(
-    @InjectRepository(Customer)
+    @InjectRepository(CustomerRepository)
     private readonly customerRepository: CustomerRepository,
-    @InjectRepository(Student)
+    @InjectRepository(StudentRepository)
     private readonly studentRepository: StudentRepository
   ) {}
   async create(customerDto: CreateCustomerDto): Promise<Customer> {
@@ -38,24 +39,25 @@ export class CustomerService {
     return this.customerRepository.find();
   }
 
+  @Transactional()
   async findOne(id: number): Promise<Customer> {
-    const customer = await this.studentRepository.findOne({
-      select: ["organization"],
+    const result = await this.customerRepository.findOne({
+      select: ["type"],
       where: { id },
     });
-   
-    const result = (customer
-    ? await this.studentRepository.findOne(id)
-    : await this.customerRepository.findOne(id))!;
 
     if (!result) throw new NotFoundException();
 
-    return result
+    const customer = (result.type === CustomerType.Customer
+      ? await this.customerRepository.findOne(id)
+      : await this.studentRepository.findOne(id))!;
+
+    return customer;
   }
 
   @Transactional()
   async remove(id: number): Promise<void> {
-    const result = await this.customerRepository.delete(id);
+    const result = await this.customerRepository.softDelete(id);
     if (!result.affected) throw new NotFoundException();
   }
 }
