@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ChildEntity, Column } from "typeorm";
+import { Customer } from "./customer.entity";
 
-@Entity({ name: "student" })
-export class Student {
-  @PrimaryGeneratedColumn()
-  id: number;
+@ChildEntity()
+export class Student extends Customer {
+  @Column({ type: "text", nullable: true })
+  organization?: string;
 }
