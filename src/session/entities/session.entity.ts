@@ -1,29 +1,28 @@
+import { Expose } from "class-transformer";
 import { BaseEntity } from "src/core/entities/base.entity";
 import { MovieRoom } from "src/movie-room/entities/movie-room.entity";
 import { Movie } from "src/movie/entities/movie.entity";
-import { PriceSession } from "src/priceSession/entities/price_session.entity";
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  JoinColumn,
-  ManyToOne,
-} from "typeorm";
+import { SessionPrice } from "src/session-price/entities/session-price.entity";
+import { Ticket } from "src/ticket/entities/ticket.entity";
+import { Entity, Column, ManyToOne, Index, OneToMany } from "typeorm";
 
-@Entity()
+@Entity("session")
 export class Session extends BaseEntity {
-  @Column("date")
+  @Index("IX_session_date")
+  @Column("timestamp without time zone")
   date: Date;
 
-  @Column("number")
+  @Column("int")
   roomId: number;
 
-  @Column("number")
+  @Column("int")
   movieId: number;
 
-  @Column("number")
-  priceSessionId: number;
+  @Column("int")
+  priceId: number;
+
+  @OneToMany(() => Ticket, (ticket) => ticket.session)
+  tickets: Ticket[];
 
   @ManyToOne(() => Movie)
   movie: Movie;
@@ -31,7 +30,16 @@ export class Session extends BaseEntity {
   @ManyToOne(() => MovieRoom)
   room: MovieRoom;
 
-  @ManyToOne(() => PriceSession)
-  priceSession: PriceSession;
+  @ManyToOne(() => SessionPrice)
+  price: SessionPrice;
 
+  @Expose()
+  get remainingSeats(): number {
+    return this.room.capacity - this.tickets.length;
+  }
+
+  @Expose()
+  get hasRemainingSeats(): boolean {
+    return this.remainingSeats > 0;
+  }
 }

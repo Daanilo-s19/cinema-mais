@@ -12,9 +12,11 @@ export class MovieService {
     @InjectRepository(Movie)
     private readonly movieRepository: MovieRepository
   ) {}
+
+  @Transactional()
   async create(movieDto: CreateMovieDto): Promise<Movie> {
     const movie = this.movieRepository.create(movieDto);
-    return this.movieRepository.save(movie);
+    return await this.movieRepository.save(movie);
   }
 
   @Transactional()

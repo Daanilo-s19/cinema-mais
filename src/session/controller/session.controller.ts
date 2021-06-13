@@ -1,18 +1,37 @@
-import { Controller, Get } from "@nestjs/common";
-import { CreateSessionDto } from "../dto/session.dto";
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  UseInterceptors,
+} from "@nestjs/common";
+import { CreateSessionDto } from "../dto/create-session.dto";
+import { SearchSessionDto } from "../dto/search-session.dto";
 import { Session } from "../entities/session.entity";
 import { SessionService } from "../services/session.service";
 
 @Controller("session")
+@UseInterceptors(ClassSerializerInterceptor)
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
-  @Get()
-  findAll(sessionDto: CreateSessionDto): Promise<Session[]> {
-    return this.sessionService.findRemainingAmount(sessionDto);
+  @Post()
+  async create(@Body() createSessionDto: CreateSessionDto): Promise<Session> {
+    return await this.sessionService.createSession(createSessionDto);
   }
+
   @Get()
-  isFullSession(sessionDto: CreateSessionDto): Promise<boolean> {
-    return this.sessionService.isFullSession(sessionDto);
+  async findAll(@Query() sessionDto: SearchSessionDto): Promise<Session[]> {
+    return await this.sessionService.findAll(sessionDto);
+  }
+
+  @Delete(":id")
+  async remove(@Param("id", ParseIntPipe) id: number): Promise<void> {
+    return await this.sessionService.remove(id);
   }
 }

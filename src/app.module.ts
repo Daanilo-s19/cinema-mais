@@ -1,7 +1,5 @@
 import { CustomerModule } from "./customer/customer.module";
 import { TicketModule } from "./ticket/ticket.module";
-import { PriceSessionController } from "./priceSession/controller/price_session.controller";
-import { PriceSessionModule } from "./priceSession/price_session.module";
 import { SessionModule } from "./session/session.module";
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -13,6 +11,7 @@ import { AppController } from "./controllers/app.controller";
 import { CinemaModule } from "./cinema/cinema.module";
 import { MovieModule } from "./movie/movie.module";
 import { MovieRoomModule } from "./movie-room/movie-room.module";
+import { SessionPriceModule } from "./session-price/session-price.module";
 
 @Module({
   imports: [
@@ -28,11 +27,11 @@ import { MovieRoomModule } from "./movie-room/movie-room.module";
     LoggerModule,
     CinemaModule,
     MovieRoomModule,
-    PriceSessionModule,
     SessionModule,
     MovieModule,
     CustomerModule,
     TicketModule,
+    SessionPriceModule,
   ],
   controllers: [AppController],
 })

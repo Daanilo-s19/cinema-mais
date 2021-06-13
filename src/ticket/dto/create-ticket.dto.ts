@@ -1,13 +1,9 @@
 import { isPositive, IsPositive, Min } from "class-validator";
 
-export class TicketDto {
-  @IsPositive()
-  id: number;
-  @IsPositive()
-  @Min(1)
-  price: number;
+export class CreateTicketDto {
   @IsPositive()
   sessionId: number;
+
   @IsPositive()
   customerId: number;
 }

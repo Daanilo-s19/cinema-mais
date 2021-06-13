@@ -1,30 +1,22 @@
+import { BaseEntity } from "src/core/entities/base.entity";
 import { Customer } from "src/customer/entities/customer.entity";
 import { Session } from "src/session/entities/session.entity";
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  OneToOne,
-  JoinColumn,
-} from "typeorm";
+import { Entity, Column, ManyToOne } from "typeorm";
 
-@Entity()
-export class Ticket {
-  @PrimaryGeneratedColumn()
-  id: number;
+@Entity("ticket")
+export class Ticket extends BaseEntity {
   @Column("int")
   price: number;
 
   @Column("int")
-  customerId: number;
-  @OneToOne(() => Customer)
-  @JoinColumn()
-  customer: Customer;
+  sessionId: number;
 
   @Column("int")
-  sessionId: number;
-  @OneToOne(() => Session)
-  @JoinColumn()
+  customerId: number;
+
+  @ManyToOne(() => Customer)
+  customer: Customer;
+
+  @ManyToOne(() => Session)
   session: Session;
 }

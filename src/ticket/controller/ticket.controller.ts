@@ -11,32 +11,26 @@ import {
 } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { Response } from "express";
-import { TicketDto } from "../dto/ticket.dto";
+import { CreateTicketDto } from "../dto/create-ticket.dto";
 import { Ticket } from "../entities/ticket.entity";
 import { TicketViewerJson } from "../providers/ticker-viewer-json.provider";
 import { TicketViewerHtml } from "../providers/ticket-viewer-html.provider";
 import { TicketViewerStrategy } from "../providers/ticket-viewer-strategy.provider";
 import { TicketViewerXml } from "../providers/ticket-viewer-xml.provider";
 import { TicketViewerYaml } from "../providers/ticket-viewer-yaml.provider";
+import { BuyTicketFacade } from "../services/create-ticket-facade.service";
 import { TicketService } from "../services/ticket.service";
 
 @Controller("ticket")
 export class TicketController {
   constructor(
     private readonly ticketService: TicketService,
+    private readonly buyTicketFacade: BuyTicketFacade,
     private moduleRef: ModuleRef
   ) {}
   @Post()
-  create(@Body() ticketDto: TicketDto): Promise<Ticket> {
-    return this.ticketService.create(ticketDto);
-  }
-
-  @Put(":id")
-  update(
-    @Param("id") id: number,
-    @Body() ticketDto: TicketDto
-  ): Promise<Ticket> {
-    return this.ticketService.update(id, ticketDto);
+  create(@Body() ticketDto: CreateTicketDto): Promise<Ticket> {
+    return this.buyTicketFacade.buy(ticketDto);
   }
 
   @Get()
@@ -83,10 +77,5 @@ export class TicketController {
     res.setHeader("Content-Type", "text/yaml");
 
     return res.send(await ticketViewer.generate(ticket));
-  }
-
-  @Delete(":id")
-  remove(@Param("id") id: number): Promise<void> {
-    return this.ticketService.remove(id);
   }
 }
