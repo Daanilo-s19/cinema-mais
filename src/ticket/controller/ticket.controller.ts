@@ -8,11 +8,9 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Res,
   UseInterceptors,
 } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
-import { Response } from "express";
 import { CreateTicketDto } from "../dto/create-ticket.dto";
 import { Ticket } from "../entities/ticket.entity";
 import { TicketViewerHtml } from "../providers/ticket-viewer-html.provider";
