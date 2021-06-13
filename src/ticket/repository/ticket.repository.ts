@@ -8,6 +8,7 @@ export abstract class TicketRepository extends BaseRepository<Ticket> {
     const query = this.createQueryBuilder("ticket");
 
     query
+      .innerJoinAndSelect("ticket.customer", "customer")
       .innerJoinAndSelect("ticket.session", "session")
       .innerJoinAndSelect("session.room", "room")
       .where("ticket.id = :id", { id });

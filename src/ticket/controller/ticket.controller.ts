@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   Param,
   ParseIntPipe,
   Post,
@@ -47,39 +48,36 @@ export class TicketController {
   }
 
   @Get(":id/html")
-  async view(@Param("id", ParseIntPipe) id: number, @Res() res: Response) {
+  @Header("Content-Type", "text/html")
+  async view(@Param("id", ParseIntPipe) id: number) {
     const ticket = await this.findOne(id);
     const ticketViewer: TicketViewerStrategy = this.moduleRef.get(
       TicketViewerHtml
     );
 
-    res.setHeader("Content-Type", "text/html");
-
-    return res.send(await ticketViewer.generate(ticket));
+    return await ticketViewer.generate(ticket);
   }
 
   @Get(":id/xml")
-  async viewXml(@Param("id", ParseIntPipe) id: number, @Res() res: Response) {
+  @Header("Content-Type", "application/xml")
+  async viewXml(@Param("id", ParseIntPipe) id: number) {
     const ticket = await this.findOne(id);
     const ticketViewer: TicketViewerStrategy = this.moduleRef.get(
       TicketViewerXml
     );
 
-    res.setHeader("Content-Type", "application/xml");
-
-    return res.send(await ticketViewer.generate(ticket));
+    return await ticketViewer.generate(ticket);
   }
 
   @Get(":id/yaml")
-  async viewYaml(@Param("id", ParseIntPipe) id: number, @Res() res: Response) {
+  @Header("Content-Type", "application/yaml")
+  async viewYaml(@Param("id", ParseIntPipe) id: number) {
     const ticket = await this.findOne(id);
     const ticketViewer: TicketViewerStrategy = this.moduleRef.get(
       TicketViewerYaml
     );
 
-    res.setHeader("Content-Type", "text/yaml");
-
-    return res.send(await ticketViewer.generate(ticket));
+    return await ticketViewer.generate(ticket);
   }
 
   @Delete(":id")
