@@ -7,9 +7,12 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
+  BadRequestException,
 } from "@nestjs/common";
 import { SessionPriceService } from "../session-price.service";
 import { CreateSessionPriceDto } from "../dtos/create-session-price.dto";
+import { SessionPrice } from "../entities/session-price.entity";
 
 @Controller("session-price")
 export class SessionPriceController {
@@ -25,8 +28,12 @@ export class SessionPriceController {
     return this.sessionPriceService.findAll();
   }
 
-  @Get(":id")
-  findOne(@Param("id", ParseIntPipe) id: number) {
-    return this.sessionPriceService.findOne(+id);
+  @Get(":date")
+  findOne(@Param("date") dateStr: string): Promise<SessionPrice> {
+    const date = new Date(dateStr);
+    if (!date) {
+      throw new BadRequestException(dateStr, "must be an valid date string");
+    }
+    return this.sessionPriceService.findByDate(date);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { endOfDay, startOfDay } from "date-fns";
 import { MovieRoomService } from "src/movie-room/services/movie-room.service";
+import { MovieService } from "src/movie/services/movie.service";
 import { SessionPriceService } from "src/session-price/session-price.service";
 import { Between } from "typeorm";
 import { Transactional } from "typeorm-transactional-cls-hooked";
@@ -17,6 +18,7 @@ export class SessionService {
     private readonly sessionRepository: SessionRepository,
     private readonly sessionPriceService: SessionPriceService,
     private readonly roomService: MovieRoomService,
+    private readonly movieService : MovieService,
   ) {}
 
   private static readonly relations = ["room", "movie", "price", "tickets"];
@@ -25,7 +27,9 @@ export class SessionService {
   async createSession(sessionDto: CreateSessionDto): Promise<Session> {
     const price = await this.sessionPriceService.findByDate(sessionDto.date);
     const room = await this.roomService.findOne(sessionDto.roomId);
-    const session = this.sessionRepository.create({ ...sessionDto, price, room });
+    const movie  = await this.movieService.findOne(sessionDto.movieId)
+
+    const session = this.sessionRepository.create({ ...sessionDto, price, room, movie });
     return await this.sessionRepository.save(session);
   }
 

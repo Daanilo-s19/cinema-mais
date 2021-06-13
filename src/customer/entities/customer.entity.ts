@@ -1,11 +1,11 @@
 import { BaseEntity } from "src/core/entities/base.entity";
-import { Entity, Column, TableInheritance } from "typeorm";
+import { Entity, Column, TableInheritance, Unique } from "typeorm";
 import { CustomerType } from "../enums/customer-type.enum";
 
 @Entity({ name: "customer" })
 @TableInheritance({ column: { type: "varchar", name: "type" } })
 export class Customer extends BaseEntity {
-  @Column("varchar")
+  @Column({ type: "varchar", unique: true })
   cpf: string;
 
   @Column("varchar")
@@ -15,6 +15,6 @@ export class Customer extends BaseEntity {
   type: CustomerType;
 
   getDiscountPercentage(): number {
-    return 0;
+    return 1;
   }
 }

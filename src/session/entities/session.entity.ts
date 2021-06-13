@@ -58,4 +58,9 @@ export class Session extends BaseEntity {
       this.movie.duration + CLEANING_OFFSET
     );
   }
+
+  priceWithRoomPercentage(): number {
+    console.log(this.price, this.room);
+    return this.price.amount * (1 + this.room.getAdditionalPercentage());
+  }
 }

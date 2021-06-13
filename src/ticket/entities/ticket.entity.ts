@@ -12,14 +12,12 @@ export class Ticket extends BaseEntity {
   @Column("int")
   customerId: number;
 
+  @Column({ type: "double precision", default: 100 })
+  price: number;
+
   @ManyToOne(() => Customer)
   customer: Customer;
 
   @ManyToOne(() => Session)
   session: Session;
-
-  @Expose()
-  get price(): number {
-    return 0;
-  }
 }

@@ -16,14 +16,14 @@ export class SessionPriceService {
   async create(
     createSessionPriceDto: CreateSessionPriceDto
   ): Promise<SessionPrice[]> {
-    await this.sessionPriceRepository.softDelete({ id: Not(IsNull()) });
-
     return await this.sessionPriceRepository.save([
-      { amount: createSessionPriceDto.amount },
-      {
+      this.sessionPriceRepository.create({
+        amount: createSessionPriceDto.amount,
+      }),
+      this.sessionPriceRepository.create({
         amount: createSessionPriceDto.weekendAmount,
         isWeekend: true,
-      },
+      }),
     ]);
   }
 
@@ -33,7 +33,9 @@ export class SessionPriceService {
 
   async findOne(id: number): Promise<SessionPrice> {
     const price = await this.sessionPriceRepository.findOne(id);
+
     if (!price) throw new NotFoundException();
+
     return price;
   }
 
@@ -42,6 +44,9 @@ export class SessionPriceService {
       where: {
         createdAt: LessThanOrEqual(date),
         isWeekend: isWeekend(date),
+      },
+      order: {
+        createdAt: "DESC",
       },
     });
 
