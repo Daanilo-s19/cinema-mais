@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Transactional } from "typeorm-transactional-cls-hooked";
 import { TicketRepository } from "../repository/ticket.repository";
 import { TicketService } from "./ticket.service";
 
@@ -11,6 +12,7 @@ export class CancelTicketFacade {
     private readonly ticketService: TicketService
   ) {}
 
+  @Transactional()
   async cancel(id: number): Promise<void> {
     const ticket = await this.ticketService.findOne(id);
 
