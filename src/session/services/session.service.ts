@@ -18,7 +18,7 @@ export class SessionService {
     private readonly sessionRepository: SessionRepository,
     private readonly sessionPriceService: SessionPriceService,
     private readonly roomService: MovieRoomService,
-    private readonly movieService : MovieService,
+    private readonly movieService: MovieService
   ) {}
 
   private static readonly relations = ["room", "movie", "price", "tickets"];
@@ -27,9 +27,14 @@ export class SessionService {
   async createSession(sessionDto: CreateSessionDto): Promise<Session> {
     const price = await this.sessionPriceService.findByDate(sessionDto.date);
     const room = await this.roomService.findOne(sessionDto.roomId);
-    const movie  = await this.movieService.findOne(sessionDto.movieId)
+    const movie = await this.movieService.findOne(sessionDto.movieId);
 
-    const session = this.sessionRepository.create({ ...sessionDto, price, room, movie });
+    const session = this.sessionRepository.create({
+      ...sessionDto,
+      price,
+      room,
+      movie,
+    });
     return await this.sessionRepository.save(session);
   }
 
@@ -44,12 +49,16 @@ export class SessionService {
     });
   }
 
+  @Transactional()
   async findOne(id: number): Promise<Session> {
     const session = await this.sessionRepository.findOne({
-      relations: SessionService.relations,
+      relations: SessionService.relations.filter(
+        (relation) => relation !== "room"
+      ),
       where: { id },
     });
     if (!session) throw new NotFoundException();
+    session.room = await this.roomService.findOne(session.roomId);
     return session;
   }
 
