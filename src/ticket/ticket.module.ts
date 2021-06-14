@@ -13,6 +13,7 @@ import { TicketViewerYaml } from "./providers/ticket-viewer-yaml.provider";
 
 import { BuyTicketFacade } from "./services/buy-ticket-facade.service";
 import { CancelTicketFacade } from "./services/cancel-ticket-facade.service";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [

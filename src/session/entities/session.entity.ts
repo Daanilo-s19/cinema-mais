@@ -59,6 +59,11 @@ export class Session extends BaseEntity {
     );
   }
 
+  @Expose()
+  get time(): string {
+    return dateUtil.format(this.date, "HH:mm");
+  }
+
   priceWithRoomPercentage(): number {
     console.log(this.price, this.room);
     return this.price.amount * (1 + this.room.getAdditionalPercentage());

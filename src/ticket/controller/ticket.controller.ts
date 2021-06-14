@@ -79,7 +79,21 @@ export class TicketController {
   }
 
   @Delete(":id")
-  async cancelTicket(@Param("id", ParseIntPipe) id: number): Promise<void> {
+  async cancelTicket(@Param("id", ParseIntPipe) id: number) {
     await this.cancelTicketFacade.cancel(id);
+  }
+
+  @Get(":id/cancel")
+  @Header("Content-Type", "text/html")
+  async cancelTicketHtml(@Param("id", ParseIntPipe) id: number) {
+    await this.cancelTicketFacade.cancel(id);
+
+    return `
+    <html>
+    <body>
+      <h2>Ingresso #${id} cancelado com sucesso</h2>
+    </body>
+    </html>
+    `;
   }
 }

@@ -45,8 +45,8 @@
                 color: #ffffff;
               "
             >
-              Olá <b>{user}!</b></span
-            ><br />
+              Olá, <strong>{{customer.name}}</strong>!
+            <br />
             <div style="margin-top: 30px">
               <span
                 style="
@@ -58,9 +58,8 @@
                   color: #ffffff;
                 "
               >
-			  //TODO: params
-                Olá, {user}! Seu ingresso {id}, no valor de R${price}, foi comprado com sucesso!<br/>
-                A sessão do seu filme {titulo do filme} iniciará às {horário}. A equipe Cinema Mias, {nome}, deseja um ótimo filme!              </span>
+                Seu ingresso, no valor de R$ {{price}}, foi comprado com sucesso!<br/>
+                A sessão do seu filme <strong>{{session.movie.title}}</strong> iniciará às <strong>{{session.time}}</strong>. A equipe Cinema Mais, deseja um ótimo filme!              </span>
             </div>
             <div style="margin-top: 30px">
               <span
@@ -111,8 +110,7 @@
       </tr>
       <tr>
         <td align="center" style="padding: 56px 0 16px">
-        //TODO: endpoint delete ticket
-          <a href="http://">
+          <a href={{cancelLink}}>
             <span
             style="
               font-style: normal;
@@ -126,7 +124,6 @@
             "
             >Cancelar Ingresso</span
           ></a>
-            
           </div>
         </td>
       </tr>
