@@ -57,7 +57,7 @@ export class BuyTicketFacade {
     student: Student,
     session: Session
   ): Promise<void> {
-    const hasBoughtOthers = new Boolean(
+    const hasBoughtOthers = Boolean(
       await this.ticketRepository.count({ customer: student, session })
     );
     if (hasBoughtOthers) {

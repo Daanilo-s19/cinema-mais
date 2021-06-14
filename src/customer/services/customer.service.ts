@@ -22,9 +22,11 @@ export class CustomerService {
     private readonly studentRepository: StudentRepository,
     private readonly customerFactory: CustomerFactory
   ) {}
+
+  @Transactional()
   async create(customerDto: CreateCustomerDto): Promise<Customer> {
     const { cpf } = customerDto;
-    const cpfExists = new Boolean(await this.customerRepository.count({ cpf }));
+    const cpfExists = Boolean(await this.customerRepository.count({ cpf }));
     if (cpfExists) {
       throw new UnprocessableEntityException(
         "a customer already exists with given cpf"
