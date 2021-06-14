@@ -1,6 +1,7 @@
 import { Cinema } from "src/cinema/entities/cinema.entity";
 import { BaseEntity } from "src/core/entities/base.entity";
-import { Entity, Column, ManyToOne, TableInheritance } from "typeorm";
+import { Session } from "src/session/entities/session.entity";
+import { Entity, Column, ManyToOne, TableInheritance, OneToMany } from "typeorm";
 import { MovieRoomType } from "../enums/movie-room-type.enum";
 
 @Entity()
@@ -20,6 +21,9 @@ export class MovieRoom extends BaseEntity {
 
   @ManyToOne(() => Cinema)
   cinema: Cinema;
+
+  @OneToMany(() => Session, (session) => session.room)
+  sessions: Session[]
 
   getAdditionalPercentage(): number {
     return 0;

@@ -65,7 +65,6 @@ export class Session extends BaseEntity {
   }
 
   priceWithRoomPercentage(): number {
-    console.log(this.price, this.room);
     return this.price.amount * (1 + this.room.getAdditionalPercentage());
   }
 }

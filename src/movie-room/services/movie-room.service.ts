@@ -6,7 +6,6 @@ import { CreateMovieRoomDto } from "../dto/create-movie-room-dto";
 import { UpdateMovieRoomDto } from "../dto/update-movie-room.dto";
 import { MovieRoom3d } from "../entities/movie-room-3d.entity";
 import { MovieRoom } from "../entities/movie-room.entity";
-import { MovieRoomType } from "../enums/movie-room-type.enum";
 import { MovieRoomFactory } from "../factories/movie-room.factory";
 import { MovieRoom3dRepository } from "../repository/movie-room-3d.repository";
 import { MovieRoomRepository } from "../repository/movie-room.repository";
