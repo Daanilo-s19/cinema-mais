@@ -22,6 +22,11 @@ export class UpdateMovieDto {
   @IsOptional()
   @Length(3, 255)
   @IsString()
+  principal?: string;
+
+  @IsOptional()
+  @Length(3, 255)
+  @IsString()
   actor?: string;
 
   @IsOptional()

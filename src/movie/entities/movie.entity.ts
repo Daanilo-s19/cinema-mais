@@ -10,6 +10,8 @@ export class Movie extends BaseEntity {
   director: string;
   @Column("text")
   actor: string;
+  @Column("text")
+  principal: string;
   @Column("int")
   duration: number;
   @Column("varchar")

@@ -24,7 +24,7 @@ export class CustomerService {
   ) {}
 
   @Transactional()
-  async create(customerDto: CreateCustomerDto): Promise<Customer> {
+  async createCustomer(customerDto: CreateCustomerDto): Promise<Customer> {
     const { cpf } = customerDto;
     const cpfExists = Boolean(await this.customerRepository.count({ cpf }));
     if (cpfExists) {
@@ -39,7 +39,10 @@ export class CustomerService {
   }
 
   @Transactional()
-  async update(id: number, customerDto: UpdateCustomerDto): Promise<Customer> {
+  async updateCustomer(
+    id: number,
+    customerDto: UpdateCustomerDto
+  ): Promise<Customer> {
     let customer = await this.findOne(id);
     if (customer instanceof Student) {
       customer = this.studentRepository.merge(customer, customerDto);

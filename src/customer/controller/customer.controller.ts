@@ -17,7 +17,7 @@ export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
   @Post()
   create(@Body() customerDto: CreateCustomerDto): Promise<Customer> {
-    return this.customerService.create(customerDto);
+    return this.customerService.createCustomer(customerDto);
   }
 
   @Put(":id")
@@ -25,7 +25,7 @@ export class CustomerController {
     @Param("id", ParseIntPipe) id: number,
     @Body() customerDto: UpdateCustomerDto
   ): Promise<Customer> {
-    return this.customerService.update(id, customerDto);
+    return this.customerService.updateCustomer(id, customerDto);
   }
 
   @Get()
@@ -34,7 +34,7 @@ export class CustomerController {
   }
 
   @Get(":id")
-  findOne(@Param("id", ParseIntPipe) id: number): Promise<Customer | undefined> {
+  findOne(@Param("id", ParseIntPipe) id: number): Promise<Customer> {
     return this.customerService.findOne(id);
   }
 

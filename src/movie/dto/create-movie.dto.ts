@@ -12,6 +12,10 @@ export class CreateMovieDto {
 
   @Length(3, 255)
   @IsString()
+  principal: string;
+
+  @Length(3, 255)
+  @IsString()
   actor: string;
 
   @IsPositive()

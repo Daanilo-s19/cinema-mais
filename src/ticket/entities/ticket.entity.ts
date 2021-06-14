@@ -12,7 +12,7 @@ export class Ticket extends BaseEntity {
   @Column("int")
   customerId: number;
 
-  @Column({ type: "double precision", default: 100 })
+  @Column("double precision")
   price: number;
 
   @ManyToOne(() => Customer)

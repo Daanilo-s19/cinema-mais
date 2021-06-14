@@ -4,7 +4,7 @@ import { endOfDay, startOfDay } from "date-fns";
 import { MovieRoomService } from "src/movie-room/services/movie-room.service";
 import { MovieService } from "src/movie/services/movie.service";
 import { SessionPriceService } from "src/session-price/session-price.service";
-import { Between } from "typeorm";
+import { Between, FindConditions } from "typeorm";
 import { Transactional } from "typeorm-transactional-cls-hooked";
 import { CreateSessionDto } from "../dto/create-session.dto";
 import { SearchSessionDto } from "../dto/search-session.dto";
@@ -39,9 +39,16 @@ export class SessionService {
   }
 
   async findAll(searchDto: SearchSessionDto): Promise<Session[]> {
-    const where = searchDto.date
-      ? { date: Between(startOfDay(searchDto.date), endOfDay(searchDto.date)) }
-      : {};
+    const where: FindConditions<Session> = {};
+    if (searchDto.date) {
+      where.date = Between(
+        startOfDay(searchDto.date),
+        endOfDay(searchDto.date)
+      );
+    }
+    if (searchDto.roomId) {
+      where.roomId = searchDto.roomId;
+    }
 
     return this.sessionRepository.find({
       relations: SessionService.relations,
