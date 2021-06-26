@@ -8,7 +8,7 @@ API para um Cinema utilizando Design Patterns.
 
 ### Factory
 
-Para suprir as heranças entre Sala e Cliente, utilizamos [MovieRoomFactory](src/movie-room/factories/movie-room.factory.ts) e [CustomerFactory](src/customer/factories/customer.factory.ts)
+Utilizamos [MovieRoomFactory](src/movie-room/factories/movie-room.factory.ts) e [CustomerFactory](src/customer/factories/customer.factory.ts)
 
 ### Facade
 
